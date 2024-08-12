@@ -6,4 +6,6 @@
 
 ## Stack
 
-React, React Router, React Query, Styled Components, Supabase, React Hook Form
+Client: React, React Router, React Query, Styled Components, React Hook Form
+
+Server: Supabase
