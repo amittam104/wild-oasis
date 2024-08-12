@@ -6,4 +6,4 @@
 
 ## Stack
 
-React, React Router, React Query, Styled Components, Spabase
+React, React Router, React Query, Styled Components, Supabase, React Hook Form
