@@ -12,8 +12,8 @@ import { useEditCabin } from "./useEditCabin";
 
 function CreateCabinForm({ cabinToEdit = {} }) {
   const { id: editId, ...editValues } = cabinToEdit;
-  const {createCabin, isCreating} = useCreateCabin();
-  const {editCabin, isEditing} = useEditCabin();
+  const { createCabin, isCreating } = useCreateCabin();
+  const { editCabin, isEditing } = useEditCabin();
 
   const isEditSession = Boolean(editId);
 
@@ -26,7 +26,6 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
-  
 
   const isWorking = isCreating || isEditing;
 
@@ -34,12 +33,19 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
     if (isEditSession)
-      editCabin({ newCabinData: { ...data, image: image }, id: editId } , {
-        onSuccess: (data) => reset()
-      });
-    else createCabin({ ...data, image: image }, {
-      onSuccess: (data) => reset()
-    });
+      editCabin(
+        { newCabinData: { ...data, image: image }, id: editId },
+        {
+          onSuccess: () => reset(),
+        }
+      );
+    else
+      createCabin(
+        { ...data, image: image },
+        {
+          onSuccess: () => reset(),
+        }
+      );
   }
 
   return (
