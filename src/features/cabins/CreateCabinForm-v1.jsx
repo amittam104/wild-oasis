@@ -1,52 +1,49 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import { createCabin } from "../../services/apiCabins";
 import FormRow from "../../ui/FormRow";
 
+import { useForm } from "react-hook-form";
+import { createCabin } from "../../services/apiCabins";
+
 function CreateCabinForm() {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    getValues,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset, getValues, formState } = useForm();
+  const { errors } = formState;
+
   const queryClient = useQueryClient();
 
   const { mutate, isLoading: isCreating } = useMutation({
     mutationFn: createCabin,
     onSuccess: () => {
-      toast.success("New Cabin Successfuly created");
+      toast.success("New cabin successfully created");
       queryClient.invalidateQueries({ queryKey: ["cabins"] });
       reset();
     },
-    onError: (error) => {
-      toast.error(error.message);
-    },
+    onError: (err) => toast.error(err.message),
   });
 
   function onSubmit(data) {
     mutate({ ...data, image: data.image[0] });
+  }
 
-    // console.log(data);
+  function onError(errors) {
+    // console.log(errors);
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)}>
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
           id="name"
           disabled={isCreating}
           {...register("name", {
-            required: "This field is required to submit the form.",
+            required: "This field is required",
           })}
         />
       </FormRow>
@@ -57,10 +54,10 @@ function CreateCabinForm() {
           id="maxCapacity"
           disabled={isCreating}
           {...register("maxCapacity", {
-            required: "This field is required to submit the form.",
+            required: "This field is required",
             min: {
               value: 1,
-              message: "Capacity should be atleast 1",
+              message: "Capacity should be at least 1",
             },
           })}
         />
@@ -72,7 +69,11 @@ function CreateCabinForm() {
           id="regularPrice"
           disabled={isCreating}
           {...register("regularPrice", {
-            required: "This field is required to submit the form.",
+            required: "This field is required",
+            min: {
+              value: 1,
+              message: "Capacity should be at least 1",
+            },
           })}
         />
       </FormRow>
@@ -84,25 +85,26 @@ function CreateCabinForm() {
           disabled={isCreating}
           defaultValue={0}
           {...register("discount", {
-            required: "This field is required to submit the form.",
+            required: "This field is required",
             validate: (value) =>
               value <= getValues().regularPrice ||
-              "Discount amount should be less than regular price.",
+              "Discount should be less than regular price",
           })}
         />
       </FormRow>
 
       <FormRow
         label="Description for website"
+        disabled={isCreating}
         error={errors?.description?.message}
       >
         <Textarea
           type="number"
           id="description"
-          disabled={isCreating}
           defaultValue=""
+          disabled={isCreating}
           {...register("description", {
-            required: "This field is required to submit the form.",
+            required: "This field is required",
           })}
         />
       </FormRow>
@@ -111,10 +113,8 @@ function CreateCabinForm() {
         <FileInput
           id="image"
           accept="image/*"
-          type="file"
-          disabled={isCreating}
           {...register("image", {
-            required: "This field is required to submit the form.",
+            required: "This field is required",
           })}
         />
       </FormRow>

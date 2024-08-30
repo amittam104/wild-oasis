@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-/* eslint-disable react/prop-types */
 const StyledFormRow = styled.div`
   display: grid;
   align-items: center;
