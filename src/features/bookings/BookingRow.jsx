@@ -124,16 +124,14 @@ function BookingRow({
             >
               See details
             </Menus.Button>
-
-            {status === "unconfirmed" && (
+            {/* {status === "unconfirmed" && (
               <Menus.Button
                 onClick={() => navigate(`/checkin/${bookingId}`)}
                 icon={<HiArrowDownOnSquare />}
               >
                 Check in
               </Menus.Button>
-            )}
-
+            )} */}
             {/* {status === "checked-in" && (
               <Menus.Button
                 onClick={() => checkout(bookingId)}
@@ -143,14 +141,11 @@ function BookingRow({
                 Check out
               </Menus.Button>
             )} */}
-
-            <Menus.Button icon={<HiPencil />}>Edit booking</Menus.Button>
+            {/* <Menus.Button icon={<HiPencil />}>Edit booking</Menus.Button> */}
             {/* <Menus.Button>Delete</Menus.Button> */}
-
-            {/* Now it gets a bit confusing... */}
-            <Modal.Toggle opens="delete">
+            {/* <Modal.Toggle opens="delete">
               <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
-            </Modal.Toggle>
+            </Modal.Toggle> */}
           </Menus.List>
         </Menus.Menu>
 
