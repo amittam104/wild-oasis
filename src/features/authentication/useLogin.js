@@ -11,8 +11,8 @@ export default function useLogin() {
 
     onSuccess: (data) => {
       console.log(data);
+      navigate("/dashboard");
       toast.success("You are successfully logged in");
-      navigate("/");
     },
 
     onError: (err) => {

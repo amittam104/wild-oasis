@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 const StyledFormRow = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: 20rem 1fr 1.2fr;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  /* grid-template-columns: 20rem 1fr 1.2fr; */
   gap: 2rem;
 
   padding: 1.2rem 0;
