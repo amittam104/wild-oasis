@@ -13,6 +13,8 @@ const Form = styled.form`
       display: flex;
       flex-direction: column;
       align-items: center;
+      max-width: 80rem;
+      margin: 0 30rem;
     `}
 
   ${(props) =>
