@@ -29,7 +29,7 @@ function UserAvatar() {
   return (
     <StyledUserAvatar>
       <Avatar
-        src={user.user_metadata.Avatar || "/default-user.jpg"}
+        src={user.user_metadata.avatar || "/default-user.jpg"}
         alt={`Avatar of ${user.user_metadata.fullName}`}
       />
       <p>{user.user_metadata.fullName}</p>
