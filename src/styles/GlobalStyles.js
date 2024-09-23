@@ -190,9 +190,3 @@ img {
 `;
 
 export default GlobalStyles;
-
-/*
-FOR DARK MODE
-
-
-*/
